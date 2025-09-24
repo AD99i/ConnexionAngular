@@ -1,0 +1,21 @@
+<nav class="bg-gray-800 text-white shadow-md">
+  <ul class="flex justify-center space-x-8 py-4">
+    <li>
+      <a routerLink="/home" routerLinkActive="active" class="hover:text-yellow-400 transition duration-300">Home</a>
+    </li>
+    <li>
+      <a routerLink="/contact" routerLinkActive="active" class="hover:text-yellow-400 transition duration-300">Contact</a>
+    </li>
+    @if (authService.isAuthenticated()) {
+    <li>
+      <a routerLink="/profil" routerLinkActive="active" class="hover:text-yellow-400 transition duration-300">Profil</a>
+    </li>
+    }
+    <li>
+      <a routerLink="/register" routerLinkActive="active" class="hover:text-yellow-400 transition duration-300">Register</a>
+    </li>
+    <li>
+      <a routerLink="/login" routerLinkActive="active" class="hover:text-yellow-400 transition duration-300">Login</a>
+    </li>
+  </ul>
+</nav>

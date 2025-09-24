@@ -1,0 +1,20 @@
+<div class="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-6 py-12">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md text-center">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Profil utilisateur</h2>
+
+    <div class="space-y-2 text-left">
+      <p><span class="font-semibold">Nom :</span> {{ user.name }}</p>
+      <p><span class="font-semibold">Email :</span> {{ user.email }}</p>
+      <p><span class="font-semibold">Rôle :</span> {{ user.role }}</p>
+      <p><span class="font-semibold">Inscrit depuis :</span> {{ user.joined | date:'longDate' }}</p>
+    </div>
+
+    <button class="mt-6 bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+      Modifier le profil
+    </button>
+  </div>
+
+  <footer class="mt-12 text-sm text-gray-500">
+    &copy; 2025 - Application Angular Android
+  </footer>
+</div>
