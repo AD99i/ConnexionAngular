@@ -1,30 +1,85 @@
-<div class="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-6 py-12">
-  <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Inscription</h2>
+<div class="min-h-screen flex items-center justify-center bg-base-200 px-4">
+  <div class="card w-full max-w-md bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h1 class="text-3xl font-bold text-center mb-6">Inscription</h1>
 
-    <form (submit)="submitForm(); $event.preventDefault()" class="space-y-4">
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Email</label>
-        <input [(ngModel)]="user.email" name="email" type="email" class="mt-1 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      <form (ngSubmit)="onSubmit()" class="space-y-4">
+        <div class="form-control">
+          <label class="label" for="email">
+            <span class="label-text">Email</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            [value]="email()"
+            (input)="updateEmail($event)"
+            class="input input-bordered w-full"
+            placeholder="Votre email"
+            required
+          />
+        </div>
+
+        <div class="form-control">
+          <label class="label" for="password">
+            <span class="label-text">Mot de passe</span>
+          </label>
+          <input
+            type="password"
+            id="password"
+            [value]="password()"
+            (input)="updatePassword($event)"
+            class="input input-bordered w-full"
+            placeholder="Votre mot de passe"
+            required
+          />
+        </div>
+
+        <div class="form-control">
+          <label class="label" for="confirmPassword">
+            <span class="label-text">Confirmer le mot de passe</span>
+          </label>
+          <input
+            type="password"
+            id="confirmPassword"
+            [value]="confirmPassword()"
+            (input)="updateConfirmPassword($event)"
+            class="input input-bordered w-full"
+            placeholder="Confirmer le mot de passe"
+            required
+          />
+        </div>
+
+        @if (errorMessage()) {
+          <div class="alert alert-error">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{{ errorMessage() }}</span>
+          </div>
+        }
+
+        @if (successMessage()) {
+          <div class="alert alert-success">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{{ successMessage() }}</span>
+          </div>
+        }
+
+        <div class="form-control mt-6">
+          <button type="submit" class="btn btn-primary w-full">S'inscrire</button>
+        </div>
+      </form>
+
+      <div class="divider">OU</div>
+
+      <div class="text-center">
+        <p class="text-sm">
+          Déjà un compte ?
+          <a routerLink="/login" class="link link-primary font-medium">Se connecter</a>
+        </p>
       </div>
-
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Mot de passe</label>
-        <input [(ngModel)]="user.password" name="password" type="password" class="mt-1 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-      </div>
-
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Confirmer le mot de passe</label>
-        <input [(ngModel)]="user.confirmPassword" name="confirmPassword" type="password" class="mt-1 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-      </div>
-
-      <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition">
-        S’inscrire
-      </button>
-    </form>
+    </div>
   </div>
-
-  <footer class="mt-12 text-sm text-gray-500">
-    &copy; 2025 - Application Angular Android
-  </footer>
 </div>

@@ -1,24 +1,29 @@
-import {Component, inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {DatePipe} from '@angular/common';
+import { Component, computed } from '@angular/core';
+import { Auth } from '../../services/auth';
+import { Router, RouterLink } from '@angular/router';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profil',
-  imports: [
-    DatePipe
-  ],
+  imports: [RouterLink, UpperCasePipe],
   templateUrl: './profil.html',
   styleUrl: './profil.css'
 })
 export class Profil {
-  profilID!: string;
-  user: any; // ou mieux : User si tu as une interface
-  private readonly route: ActivatedRoute = inject(ActivatedRoute);
+  currentUser = computed(() => this.authService.currentUser());
+  userEmail = computed(() => this.currentUser()?.email || null);
 
-  ngOnInit() {
-    this.profilID = this.route.snapshot.params['id'];
+  constructor(
+    private readonly authService: Auth,
+    private readonly router: Router
+  ) {
+    if (!this.authService.isLoggedIn) {
+      this.router.navigate(['/login']);
+    }
+  }
 
-    const rawUser = localStorage.getItem('currentUser');
-    this.user = rawUser ? JSON.parse(rawUser) : null;
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/home']);
   }
 }
