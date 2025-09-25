@@ -5,6 +5,7 @@ import { Login } from './pages/login/login';
 import { Profil } from './pages/profil/profil';
 import { Contact } from './pages/contact/contact';
 import { NotFound } from './pages/not-found/not-found';
+import {authGuardGuard} from './guards/auth-guard-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,6 +13,6 @@ export const routes: Routes = [
   { path: 'contact', component: Contact},
   { path: 'register', component: Register},
   { path: 'login', component: Login},
-  { path: 'profil', component: Profil},
+  { path: 'profil', canActivate: [authGuardGuard],loadChildren: () => import('./pages/profil/profil.route').then(m => m.authRoute)},
   { path: '**', component: NotFound }
 ];
